@@ -1,0 +1,39 @@
+<template >
+<template if:true={pokemon} >
+    
+    <div class="slds-align_absolute-center card"> 
+        
+    <lightning-card variant="Narrow"  >
+        <img src={pokeBall} class="pokeBall"/>
+        
+        <h3 slot="title" class="h3">{pokemon.Name}</h3>
+        
+
+		<!--- Card Body  -->
+		<img src={pokemon.Image__c} class="slds-align_absolute-center  pokemon-img" 
+        alt="pokemon.Name" onclick={navigateToRecordViewPage}/>
+        
+        <div class="slds-media__body marginextra">
+           <!--- <p class="slds-var-m-bottom_xx-small slds-align_absolute-center"><strong>{pokemon.Name}</strong> </p>-->
+            <p class="slds-var-m-bottom_xx-small slds-align_absolute-center"><strong>PokeNumber: {pokemon.ExtId__c}</strong></p>
+            <p class="slds-var-m-bottom_xx-small slds-align_absolute-center"><strong>Type: {pokemon.Types__c}</strong></p>
+            <!-- <p class="slds-var-m-bottom_xx-small slds-align_absolute-center"><strong>Attack Power: {pokemon.stats_attack__c}</strong></p> -->
+            <p class="slds-var-m-bottom_xx-small slds-align_absolute-center"><strong>Life Points: {pokemon.stats_hp__c}</strong></p>
+            <p class="slds-var-m-bottom_xx-small slds-align_absolute-center"><strong>Height: {pokemon.heigth__c} fts</strong></p>
+            <p class="slds-var-m-bottom_xx-small slds-align_absolute-center"><strong>Weight: {pokemon.weigth__c} lbs</strong></p>
+            
+        </div>
+        <!---End Card Body  -->
+         
+            
+</lightning-card>
+</div>
+</template>
+</template>
+
+
+<!--<p class="slds-var-m-horizontal_small description">Tipo: {pokemon.Types__c}</p>
+<p class="slds-var-m-horizontal_small description">Generacíon: {pokemon.Generation__c}</p>
+<p class="slds-var-m-horizontal_small description">Altura: {pokemon.heigth__c} </p>
+<p class="slds-var-m-horizontal_small description">Peso: {pokemon.weigth__c} </p>
+<p class="slds-var-m-horizontal_small description">pokeId: {pokemon.ExtId__c}</p>-->

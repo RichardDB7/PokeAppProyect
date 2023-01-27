@@ -1,0 +1,76 @@
+<template>
+    <div class="slds-container_x-large slds-container_center slds-box ">
+        <template if:true={FindPokemons}>
+            
+            <!-- Filter Pokemon Box -->
+            <div class="slds-grid slds-p-around_small slds-align_absolute-center marginFilter">
+                <div class="slds-size_1-of-3 slds-align_absolute-center">
+                    <div class="">
+                        <div class="slds-text-heading_medium slds-p-around_x-small slds-align_absolute-center card" style="color:white;"><strong>Name</strong></div>
+                        <lightning-input
+                            type="search"
+                            onchange={FindPokemonBox}
+                            value={searchText}
+                            placeholder="Search Pokemon"
+                            variant="label-hidden"
+                            class="slds-size_small slds-align_absolute-center">
+                        </lightning-input>
+                    </div>
+                </div>
+                <!-- Filter Generation Box -->
+                <div class="slds-size_1-of-3 slds-align_absolute-center">
+                    <div class="">
+                        <div class="slds-text-heading_medium slds-p-around_x-small slds-align_absolute-center card" style="color:white;" ><strong>Generation</strong></div>
+                        <lightning-combobox
+                            value={generationValueDefault}
+                            options={optionsGeneration}
+                            onchange={GetPokesToChangeGeneration}
+                            variant="label-hidden"
+                            class="slds-size_small slds-align_absolute-center">
+                        </lightning-combobox>
+                    </div>
+                </div>
+                <!-- Filter Types Box -->
+                <div class="slds-size_1-of-3 slds-align_absolute-center">
+                    <div class="">
+                        <div class="slds-text-heading_medium slds-p-around_x-small slds-align_absolute-center card" style="color:white;"><strong>Type</strong></div>
+                        <lightning-combobox
+                            value={typeValueDefault}
+                            options={optionsType}
+                            onchange={GetPokeToChangeTypes}
+                            variant="label-hidden"
+                            class="slds-size_small slds-align_absolute-center">
+                        </lightning-combobox>
+                    </div>
+
+                </div>
+                
+            </div>
+            <div class="slds-size_1-of-2 slds-align_absolute-center title">
+                <h3 class="enc"><strong>La cantidad de pokemons atrapados son : {FindPokemons.length}</strong></h3>
+            </div>    
+
+
+            <!-- Card -->
+            <lightning-layout multiple-rows="true" pull-to-boundary="small" class="slds-container_x-large slds-align_absolute-center">
+                <template if:true={FindPokemons}>
+                    <template for:each={DataRows} for:item="pokemon">
+                        <lightning-layout-item key={pokemon.ExtId__c} size="3" class="slds-p-around_x-small">
+                            <c-pokemons-tile
+                                pokemon={pokemon}
+                                class="slds-col slds-var-m-around_small">
+                            </c-pokemons-tile>
+                        </lightning-layout-item>
+                    </template>
+                </template>
+            </lightning-layout>
+            <div class="slds-align_absolute-center title">
+                <lightning-button-group class="paddextra">
+                    <lightning-button label="&#10096;" onclick={previous}></lightning-button>
+                    <lightning-button label={Paginated} variant="Narrow"></lightning-button>
+                    <lightning-button label="&#10097;" onclick={next}></lightning-button>   
+                </lightning-button-group>   
+            </div>
+        </template>
+    </div>
+</template>

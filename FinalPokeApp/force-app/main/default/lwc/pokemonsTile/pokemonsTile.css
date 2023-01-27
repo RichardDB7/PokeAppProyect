@@ -1,0 +1,64 @@
+:host {
+    width: 280px;
+    display: block;
+    font-size: 1rem;
+  }
+  p.description {
+    min-height: 80px;
+  }
+  img.pokemon-img {
+    height: 180px;
+    max-width: 180px;
+    margin:0px 40px 0px 40px ;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgb(221, 219, 218);
+  }
+
+  .marginextra{
+   margin-bottom: 25px; 
+  }
+
+ .pokeBall { 
+  max-width: 25px!important;
+  margin:0 auto;
+  position:absolute;
+  top:10px;
+  left: 12px;
+}
+
+  .card :hover {
+    background-color: rgba(225, 221, 221, 0.1);
+    transform: scale(1.1);
+    transition: all 0.4s ease-in-out;
+    
+  } 
+
+.h3{
+  padding-left: 30px;
+  font-size: 1.1rem;
+ 
+  
+}
+.bomb{
+  max-width: 25px!important;
+  margin:0 auto;
+  position:absolute;
+  top:295px;
+  left: 39px;
+}
+.heart{
+  max-width: 20px!important;
+  margin:0 auto;
+  position:absolute;
+  top:328px;
+  left: 78px;
+}
+.Star{
+  max-width: 20px!important;
+  margin:0 auto;
+  position:absolute;
+  top:308px;
+  left: 78px;
+}
