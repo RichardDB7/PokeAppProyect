@@ -5,6 +5,12 @@ Application developed with Apex &amp; lightning web design systems technologies.
 
 <a href="https://raw.githubusercontent.com/RichardDB7/PokeAppProyect/main/FinalProyectPicture.png">[Press here to view image]</a>
 
+
+
+                                    ****************************CODE OF CALLOUT MOCK******************************
+                                   
+   👨‍🏫---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/GeneralHttpMockCallout.cls">[CalloutMock Class]</a>
+
                                     ***********************CODE OF ABILITIY CUSTOM OBJECT**************************
                                     
    👨‍🏫---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/Abilities.cls">[Abilities Class]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/AbilityBatch.cls">[BatchAbilities Class]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/AbilityHttpCallout.cls">[AbilitiesHttpCallout Class]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/AbilitiesTest.cls">[AbilitiesTest]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/AbilityBatchTest.cls">[AbilitiesBatchTest]</a>
