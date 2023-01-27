@@ -24,6 +24,11 @@ Application developed with Apex &amp; lightning web design systems technologies.
    👨‍🏫---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/PokeService.cls">[PokeService Class]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/PokeServiceTest.cls">[PokeService Test]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/PokemonController.cls">[Pokemon Controller Class]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/PokemonControllerTest.cls">[PokemonController Test]</a> 
                                      
                                      
+                                       ***************************CODE OF LWC COMPONENTS**************************
+                                       
+                                       
+  👨‍🏫---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/lwc/pokemonsTile/pokemonsTile.html">[HTML OF SINGLE CARD]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/lwc/pokemonsTile/pokemonsTile.js">[JS OF SINGLE CARD]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/lwc/pokemonsTile/pokemonsTile.css">[CSS OF SINGLE CARD]</a>---<a href="https://github.com/RichardDB7/PokeAppProyect/blob/main/FinalPokeApp/force-app/main/default/classes/PokemonControllerTest.cls">[PokemonController Test]</a>                                      
+                                       
                                      
                                      
                                      
