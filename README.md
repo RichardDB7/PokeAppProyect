@@ -1,2 +1,6 @@
 # PokeAppProyect
 Application developed with Apex &amp; lightning web design systems technologies
+
+<strong>Index of App</strong>
+
+<a href="https://raw.githubusercontent.com/RichardDB7/SistemaDeVentas/main/Sistema.png">[Press here to view image]</a>
