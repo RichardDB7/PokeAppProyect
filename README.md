@@ -3,7 +3,8 @@ Application developed with Apex &amp; lightning web design systems technologies.
 
 <strong>Index of App</strong>
 
-<a href="https://raw.githubusercontent.com/RichardDB7/PokeAppProyect/main/FinalProyectPicture.png">[Press here to view image]</a>
+   👨‍🏫<a href="https://raw.githubusercontent.com/RichardDB7/PokeAppProyect/main/FinalProyectPicture.png">[Press here to view Image]</a>    👨‍🏫<a href="https://www.awesomescreenshot.com/video/14330837">[Press here to view Video]</a>
+
 
 
 
