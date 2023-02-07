@@ -1,3 +1,4 @@
+				    //Proceso de lotes Asincrono //llamada a servicio ext //Mantenimiento de estado de ejecuciones	
 public class AbilityBatch implements Database.Batchable<Integer>,Database.AllowsCallouts, Database.Stateful {
 
     List<Integer> abilityList;
@@ -5,12 +6,12 @@ public class AbilityBatch implements Database.Batchable<Integer>,Database.Allows
     public AbilityBatch(List<Integer> abilityList) {
         this.abilityList = abilityList;
     }
-
+    //Llamada al proceso de lotes y devuelvo la lista de enteros	
     public Iterable<Integer> start(Database.BatchableContext bc) {
         // collect the batches of records or objects to be passed to execute
         return this.abilityList;
     }
-    
+    //Proceso cada entero de la lista y llamada al metodo getAbility e inserto los datos en el objeto
     public void execute(Database.BatchableContext bc, List<Integer> records) {
         // process each batch of records
         Integer abilityId = Integer.valueOf(records[0]);
@@ -20,6 +21,7 @@ public class AbilityBatch implements Database.Batchable<Integer>,Database.Allows
         else{System.debug('Error inserting ability');}
        
     }
+     //Finalizacion y ejejución en cadena del proximo batch
     public void finish(Database.BatchableContext bc) {
     list<integer> Moves = new list<integer>();
 	for (integer i = 1 ; i <= 826 ; i++){Moves.add(i);}
