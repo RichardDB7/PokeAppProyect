@@ -13,7 +13,7 @@ public class AbilityHttpCallout {
 
 
         if(response.getStatusCode() == 200) {
-
+            //Obtengo respuesta del body y parseo el resultado
             String result = String.valueOf(response.getBody());
             abilityBodyToParse = Abilities.parse(result);
 
@@ -23,11 +23,11 @@ public class AbilityHttpCallout {
               return null;
         }
     }
-    
+    //Metodo que retorna el objeto parseado
     public static Ability__c returnedAbility(Abilities abilityParsed) {
         
         Ability__c newAbility = new Ability__c();
-
+        
         newAbility.Name__c = abilityParsed.Name.capitalize();
         newAbility.Name = abilityParsed.Name.capitalize();
         newAbility.ExtId__c = abilityParsed.id;
