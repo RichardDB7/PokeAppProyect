@@ -9,46 +9,52 @@ public with sharing class PokeHttpCallout {
         request.setMethod('GET');
 
         HttpResponse response = http.send(request);
-		Pokemons pokemonBodyToParse = new Pokemons();
+	//instancia que va a contener mi respuesta 200
+	Pokemons pokemonBodyToParse = new Pokemons();
         
         if(response.getStatusCode() == 200) {String result = String.valueOf(response.getBody());
+	//Si el status es 200 parseo la respuesta y la asigno al nuevo objeto pokemon
         pokemonBodyToParse = Pokemons.parse(result);return returnPokemon(pokemonBodyToParse);}
         else{System.debug('Status code: ' + response.getStatusCode());return null;}}
     
-		//Metodo de creacion de instancia con paso de parametro
-   		 public static Pokemon__c returnPokemon(Pokemons pokeParsed) {
+	//Metodo de creacion de instancia con paso de parametro
+   	public static Pokemon__c returnPokemon(Pokemons pokeParsed) {
 
         Pokemon__c newPokemon = new Pokemon__c();
-		//Asignacion de variables traidos del objeto Pokemons
+		//Asignacion de variables 
        	newPokemon.ExtId__c = pokeParsed.id;newPokemon.name = pokeParsed.name.capitalize(); 
         newPokemon.heigth__c = pokeParsed.height;newPokemon.Image__c = pokeParsed.sprites.front_default;   
        	newPokemon.weigth__c = pokeParsed.weight; 
         
         //Recorrido de asignacion a los tipos
         for (Integer i = 0; i <= 4; i++) 
+	//Si la variable es 0 asigno el nombre del tipo en la posición i de la lista pokeParsed.types   	
         {try{if(i == 0) {newPokemon.Types__c = pokeParsed.types.get(i).type.name;}
+	 //Caso contrario concateno tipo actual con el contenido previo separado por ; y asigno resultado a la propiedad
         else {newPokemon.Types__c = newPokemon.Types__c + ';' + pokeParsed.types.get(i).type.name;}
         }catch (Exception error) {break;}}
        
-        
-        Integer AbilityAssign  = Integer.valueof((Math.random() * pokeParsed.abilities.Size()));
+        //Genero un número aleatorio entre 0 y el tamaño de la lista pokeParsed.abilities
+        Integer AbilityAssign  = Integer.valueof((Math.random() * pokeParsed.abilities.Size()));	
         String ability = pokeParsed.abilities.get(AbilityAssign).ability.name; 
         
-        //Asignacion de Habilidad mediante busqueda del id     
+        //Asignacion de Habilidad mediante busqueda del id por coincidencia    
         try{newPokemon.Ability__c = [SELECT Id FROM Ability__c WHERE Name=:ability LIMIT 1].Id;}
         catch(System.QueryException error) {System.debug(error);}
         
-     	//Creo un mapeo claves int y valores string
+     	//Creo un mapeo claves int y valores string y asigno un numero a cada stat
         Map<Integer, String> statsMap = new Map<Integer, String>
         {0 => 'stats_hp__c',1 => 'stats_attack__c',2 => 'stats_defense__c',5 => 'stats_speed__c'};
-        //Compruebo en cada vuelta si la lista es mayor    
-		for(Integer i : statsMap.keySet()){if(pokeParsed.stats.size() > i)
-        //Añado el valor convertido base_stat de la lista pokemonParsed.stats al objeto     
+        //Compruebo en cada vuelta si la lista es mayor al indice actual   
+	
+	for(Integer i : statsMap.keySet()){if(pokeParsed.stats.size() > i)
+        //Añado entrada mediante put tomando el string de StatsMap y añado el valor 
+	//convertido de base_stat de la lista pokemonParsed utilizando nuevamente el StatsMap y como valor el string base_stat   
         {newPokemon.put(statsMap.get(i), String.valueOf(pokeParsed.stats.get(i).base_stat));}}
         
         for(Integer i = 1; i <= 4; i++){
         //En cada iteracion se asigna un numero aleatorio a la variable SlotMove  y al tamaño de la lista  
-   		Integer SlotMove = Integer.valueof((Math.random()*pokeParsed.moves.Size()));
+   	Integer SlotMove = Integer.valueof((Math.random()*pokeParsed.moves.Size()));
         //Utilizo el numero para obtener el nombre del moviemiento de la lista    
     	String movement = pokeParsed.moves.get(SlotMove).move.name;
         //Consulto si el registro contiene un nombre igual al anterior    
