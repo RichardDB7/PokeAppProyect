@@ -15,8 +15,9 @@ public class AbilityHttpCallout {
         if(response.getStatusCode() == 200) {
             //Obtengo respuesta del body y parseo el resultado
             String result = String.valueOf(response.getBody());
+            //Mi instancia contiene el resultado procesado
             abilityBodyToParse = Abilities.parse(result);
-
+            //Retorno  del metodo con la instancia como parametro
            return returnedAbility(abilityBodyToParse);
         }
         else {System.debug('Status code: ' + response.getStatusCode());
@@ -27,7 +28,7 @@ public class AbilityHttpCallout {
     public static Ability__c returnedAbility(Abilities abilityParsed) {
         
         Ability__c newAbility = new Ability__c();
-        
+        //Asignacion de valores
         newAbility.Name__c = abilityParsed.Name.capitalize();
         newAbility.Name = abilityParsed.Name.capitalize();
         newAbility.ExtId__c = abilityParsed.id;
