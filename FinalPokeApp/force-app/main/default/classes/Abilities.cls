@@ -9,7 +9,8 @@ public with sharing class Abilities {
 
     public class cls_language {public String name;public String url;}
 
-    public static Abilities parse(String json){ //Json To Apex
+	//Metodo parse y deserialize que convierte el string json en objeto abilities		
+    public static Abilities parse(String json){ 
 		return (Abilities) System.JSON.deserialize(json, Abilities.class);
 	}
 }
