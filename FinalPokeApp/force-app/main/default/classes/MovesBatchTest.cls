@@ -8,7 +8,7 @@ public class MovesBatchTest {
         for (Integer i = 1; i < 10; i++){MovesIdList.add(i);}
 
         // Crea una respuesta mock para la llamada HTTP a la API
-		String mockResponse = '{"Name":"Adaptability","id":91,"effect_entries":[{"effect":"This Pokémon moves are powered up a little by same-type attack bonuses.","language":{"name":"en","url":"https://pokeapi.co/api/v2/language/9/"},"short_effect":"STAB moves have 1.2x power."}]}';        
+		String mockResponse = '{"id": 1,"name": "pound", "accuracy": 100,"effect_chance": null,"effect_entries": [{"effect": "Inflicts regular damage.","language": {"name": "en","url": "https://pokeapi.co/api/v2/language/9/"},"short_effect": "Inflicts regular damage with no additional effect."}],"power": 40,"pp": 35,"priority": 0,"target": {"name": "selected-pokemon"},"type": {"name": "normal"}}';        
         Test.setMock(HttpCalloutMock.class, new GeneralHttpMockCallout(mockResponse, 200));
         
         // Ejecuta el proceso en batch y detiene la prueba
