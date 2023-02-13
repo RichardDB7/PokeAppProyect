@@ -33,16 +33,9 @@ public class AbilityHttpCallout {
         newAbility.Name = abilityParsed.Name.capitalize();
         newAbility.ExtId__c = abilityParsed.id;
         
-        //Verifico que la lista effect entries esta vacia
-        if (abilityParsed.effect_entries.isEmpty()){newAbility.Effect__c = 'None';}
+       newAbility.Effect__c = abilityParsed.effect_entries.isEmpty() ? 'None' : (abilityParsed.id < 267 ? 
+       abilityParsed.effect_entries[1].short_effect : abilityParsed.effect_entries[0].short_effect);
         
-        else{//Verifico que el id es menor a 267
-            if (abilityParsed.id < 267){//Se asigna el valor al segundo indice
-                newAbility.Effect__c = abilityParsed.effect_entries[1].short_effect;
-            }//Se asigna el valor al primer indice
-            else{newAbility.Effect__c = abilityParsed.effect_entries[0].short_effect;
-            }
-        }
         return newAbility;
     }
 }
