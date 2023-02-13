@@ -36,8 +36,8 @@ public class AbilityHttpCallout {
         //Verifico que la lista effect entries esta vacia
         if (abilityParsed.effect_entries.isEmpty()){newAbility.Effect__c = 'None';}
         
-        else{//Verifico que el id es menor a 191
-            if (abilityParsed.id < 191){//Se asigna el valor al segundo indice
+        else{//Verifico que el id es menor a 267
+            if (abilityParsed.id < 267){//Se asigna el valor al segundo indice
                 newAbility.Effect__c = abilityParsed.effect_entries[1].short_effect;
             }//Se asigna el valor al primer indice
             else{newAbility.Effect__c = abilityParsed.effect_entries[0].short_effect;
