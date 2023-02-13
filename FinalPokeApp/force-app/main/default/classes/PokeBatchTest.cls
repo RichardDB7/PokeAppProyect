@@ -19,7 +19,7 @@ public class PokeBatchTest {
         Test.startTest();Database.executeBatch(batch, 10);Test.stopTest();
        
         // Comprobacion de inserción del objeto "Pokemon" con sus respectivos atributos
-        List<Pokemon__c> poke = [SELECT Name FROM Pokemon__c WHERE Name = 'Bulbasur'];
+        List<Pokemon__c> poke = [SELECT Name, ExtId__c, Image__c, Types__c, heigth__c, weigth__c  FROM Pokemon__c WHERE Name = 'Bulbasur'];
         
 		/*System.assertEquals(poke[0].Name, 'Bulbasur');
         System.assertEquals(poke[0].id, '1');
