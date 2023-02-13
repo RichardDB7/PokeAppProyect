@@ -8,6 +8,6 @@ public with sharing class PokeTest {
         Pokemons Pokes = new Pokemons();
         Pokes=Pokemons.parse(poks);
         
-        System.assertEquals(x.height,8);  
+        System.assertEquals(Pokes.height,8);  
     }
 }
