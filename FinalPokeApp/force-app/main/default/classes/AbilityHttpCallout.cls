@@ -33,8 +33,8 @@ public class AbilityHttpCallout {
         newAbility.Name = abilityParsed.Name.capitalize();
         newAbility.ExtId__c = abilityParsed.id;
         
-       newAbility.Effect__c = abilityParsed.effect_entries.isEmpty() ? 'None' : (abilityParsed.id < 267 ? 
-       abilityParsed.effect_entries[1].short_effect : abilityParsed.effect_entries[0].short_effect);
+        newAbility.Effect__c = abilityParsed.effect_entries.isEmpty() ? 'None' : (abilityParsed.id < 267 ? 
+        abilityParsed.effect_entries[1].short_effect : abilityParsed.effect_entries[0].short_effect);
         
         return newAbility;
     }
