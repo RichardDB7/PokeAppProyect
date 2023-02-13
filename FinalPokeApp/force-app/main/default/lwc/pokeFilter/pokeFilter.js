@@ -20,10 +20,6 @@ export default class PokeFilter extends LightningElement {
         .catch((error) => {this.error = error;});
     }
     
-    get getType () {return (this.type === 'All');}
-    get getGen () {return (this.generation === '0');}
-
-    
     // Inicializacion de pagina mediante conected callback(insercion de elemento customizado)
     connectedCallback(){this.GetDataAndPutOnPage();}
 
