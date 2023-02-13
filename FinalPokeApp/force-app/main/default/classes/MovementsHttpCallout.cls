@@ -24,23 +24,17 @@ public class MovementsHttpCallout {
 		//Instancia del objeto custom
         Movement__c newMove = new Movement__c();
         //Asignacion de valores al objeto custom
-        if(movementParsed.name != null){newMove.Name = movementParsed.name.capitalize();newMove.name__c = movementParsed.name;}
-        else{newMove.Name = 'No Name found';newMove.name__c = 'No Name found';}
-		if(movementParsed.id != null){newMove.ExtId__c = movementParsed.id;}else{newMove.ExtId__c = 0;}
-		if(movementParsed.accuracy != null){newMove.accuracy__c = String.valueOf(movementParsed.accuracy);}
-        else{newMove.accuracy__c = 'None';}
-		if(movementParsed.effect_chance != null){newMove.effect_chance__c = movementParsed.effect_chance;}
-        else{newMove.effect_chance__c = 'None';}
-		if(!movementParsed.effect_entries.isEmpty()){newMove.effect__c = movementParsed.effect_entries[0].short_effect;}  
-        else{newMove.effect__c = 'No Effect';}if(movementParsed.power != null){newMove.power__c = String.valueOf(movementParsed.power);}           
-        else{newMove.power__c = 'None';}
-		if(movementParsed.pp != null){newMove.pp__c = String.valueOf(movementParsed.pp);}else{newMove.pp__c = 'None';}
-		if(movementParsed.priority != null){newMove.priority__c = String.valueOf(movementParsed.priority);}
-        else{newMove.priority__c = 'None';}
-		if(movementParsed.type.name != null){newMove.type_name__c = movementParsed.type.name.capitalize();}
-        else{newMove.type_name__c = 'None';}
-		if(movementParsed.target.name != null){newMove.target_name__c = movementParsed.target.name;}
-        else{newMove.target_name__c = 'None';}
+        newMove.name = movementParsed.name == null ? 'No Name' : movementParsed.name.capitalize();
+        newMove.name__c = movementParsed.name == null ? 'No Name' : movementParsed.name.capitalize();
+        newMove.ExtId__c = movementParsed.id == null ? 0 : movementParsed.id;         
+        newMove.accuracy__c = movementParsed.accuracy == null ? 'None' : String.valueOf(movementParsed.accuracy);                        
+        newMove.effect_chance__c = movementParsed.effect_chance == null ? 'None' : movementParsed.effect_chance;            
+        newMove.effect__c = movementParsed.effect_entries.isEmpty() ? 'No Effect' : movementParsed.effect_entries[0].short_effect;           
+        newMove.power__c = movementParsed.power == null ? 'None' : String.valueOf(movementParsed.power);           
+        newMove.pp__c = movementParsed.pp == null ? 'None' : String.valueOf(movementParsed.pp);            
+        newMove.priority__c = movementParsed.priority == null ? 'None' : String.valueOf(movementParsed.priority);          
+        newMove.type_name__c = movementParsed.type.name == null ? 'None' : movementParsed.type.name.capitalize();
+        newMove.target_name__c = movementParsed.target.name == null ? 'None' : movementParsed.target.name;
         
         
         return newMove;
