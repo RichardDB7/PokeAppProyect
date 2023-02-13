@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/RichardDB7/PokeAppProyect/main/FinalProyectPicture.png" height="500">
 
-<strong>Application developed with Apex &amp; lightning web design systems technologies.the application has a code coverage of 92%.</strong>
+<strong>Application developed with Apex &amp; lightning web design systems technologies.the application has a code coverage of 96%.</strong>
 
 
 
