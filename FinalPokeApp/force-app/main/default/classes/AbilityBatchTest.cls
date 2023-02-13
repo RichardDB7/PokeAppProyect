@@ -10,7 +10,7 @@ public class AbilityBatchTest {
         }
 
         // Crea una respuesta mock para la llamada HTTP a la API
-		String mockResponse = '{"id": 1,"name": "pound", "accuracy": 100,"effect_chance": null,"effect_entries": [{"effect": "Inflicts regular damage.","language": {"name": "en","url": "https://pokeapi.co/api/v2/language/9/"},"short_effect": "Inflicts regular damage with no additional effect."}],"power": 40,"pp": 35,"priority": 0,"target": {"name": "selected-pokemon"},"type": {"name": "normal"}}';
+		String mockResponse = '{"Name":"Adaptability","id":91,"effect_entries":[{"effect":"This Pokémon moves are powered up a little by same-type attack bonuses.","language":{"name":"en","url":"https://pokeapi.co/api/v2/language/9/"},"short_effect":"STAB moves have 1.2x power."}]}';
         Test.setMock(HttpCalloutMock.class, new GeneralHttpMockCallout(mockResponse, 200));
         
         // Ejecuta el proceso en batch y detiene la prueba
@@ -20,7 +20,7 @@ public class AbilityBatchTest {
         Test.stopTest();
 
         // Comprobacion de inserción del objeto "Ability" con el nombre "Test"
-        List<Ability__c> ab = [SELECT Name FROM Ability__c WHERE Name = 'Test Ability'];
+        List<Ability__c> ab = [SELECT Name, ExtId__c, Effect__c, Name__c FROM Ability__c WHERE Name = 'Test Ability'];
         System.assertEquals(ab[0].Name, 'Test Ability');
     }
 
@@ -33,7 +33,7 @@ public class AbilityBatchTest {
         }
 
         // Crea una respuesta mock para la llamada HTTP a la API
-		String mockResponse = '{"id": 1,"name": "pound", "accuracy": 100,"effect_chance": null,"effect_entries": [{"effect": "Inflicts regular damage.","language": {"name": "en","url": "https://pokeapi.co/api/v2/language/9/"},"short_effect": "Inflicts regular damage with no additional effect."}],"power": 40,"pp": 35,"priority": 0,"target": {"name": "selected-pokemon"},"type": {"name": "normal"}}';
+		String mockResponse = '{"Name":"Adaptability","id":91,"effect_entries":[{"effect":"This Pokémon moves are powered up a little by same-type attack bonuses.","language":{"name":"en","url":"https://pokeapi.co/api/v2/language/9/"},"short_effect":"STAB moves have 1.2x power."}]}';
         Test.setMock(HttpCalloutMock.class, new GeneralHttpMockCallout(mockResponse, 400));
         
         // Ejecuta el proceso en batch y detiene la prueba
