@@ -14,55 +14,100 @@ public with sharing class PokeHttpCallout {
         
         if(response.getStatusCode() == 200) {String result = String.valueOf(response.getBody());
 	//Si el status es 200 parseo la respuesta y la asigno al nuevo objeto pokemon
-        pokemonBodyToParse = Pokemons.parse(result);return returnPokemon(pokemonBodyToParse);}
+        pokemonBodyToParse = Pokemons.parse(result);return returnedPokemon(pokemonBodyToParse);}
         else{System.debug('Status code: ' + response.getStatusCode());return null;}}
     
 	//Metodo de creacion de instancia con paso de parametro
-   	public static Pokemon__c returnPokemon(Pokemons pokeParsed) {
+   	 public static Pokemon__c returnedPokemon(Pokemons pokemonBodyToParse) {
 
         Pokemon__c newPokemon = new Pokemon__c();
-		//Asignacion de variables 
-       	newPokemon.ExtId__c = pokeParsed.id;newPokemon.name = pokeParsed.name.capitalize(); 
-        newPokemon.heigth__c = pokeParsed.height;newPokemon.Image__c = pokeParsed.sprites.front_default;   
-       	newPokemon.weigth__c = pokeParsed.weight; 
-        
-        //Recorrido de asignacion a los tipos
-        for (Integer i = 0; i <= 4; i++) 
-	//Si la variable es 0 asigno el nombre del tipo en la posición i de la lista pokeParsed.types   	
-        {try{if(i == 0) {newPokemon.Types__c = pokeParsed.types.get(i).type.name;}
-	 //Caso contrario concateno tipo actual con el contenido previo separado por ; y asigno resultado a la propiedad
-        else {newPokemon.Types__c = newPokemon.Types__c + ';' + pokeParsed.types.get(i).type.name;}
-        }catch (Exception error) {break;}}
-       
-        //Genero un número aleatorio entre 0 y el tamaño de la lista pokeParsed.abilities
-        Integer AbilityAssign  = Integer.valueof((Math.random() * pokeParsed.abilities.Size()));	
-        String ability = pokeParsed.abilities.get(AbilityAssign).ability.name; 
-        
-        //Asignacion de Habilidad mediante busqueda del id por coincidencia    
-        try{newPokemon.Ability__c = [SELECT Id FROM Ability__c WHERE Name=:ability LIMIT 1].Id;}
-        catch(System.QueryException error) {System.debug(error);}
-        
-     	//Creo un mapeo claves int y valores string y asigno un numero a cada stat
-        Map<Integer, String> statsMap = new Map<Integer, String>
-        {0 => 'stats_hp__c',1 => 'stats_attack__c',2 => 'stats_defense__c',5 => 'stats_speed__c'};
-        //Compruebo en cada vuelta si la lista es mayor al indice actual   
-	
-	for(Integer i : statsMap.keySet()){if(pokeParsed.stats.size() > i)
-        //Añado entrada mediante put tomando el string de StatsMap y añado el valor 
-	//convertido de base_stat de la lista pokemonParsed utilizando nuevamente el StatsMap y como valor el string base_stat   
-        {newPokemon.put(statsMap.get(i), String.valueOf(pokeParsed.stats.get(i).base_stat));}}
-        
-        for(Integer i = 1; i <= 4; i++){
-        //En cada iteracion se asigna un numero aleatorio a la variable SlotMove  y al tamaño de la lista  
-   	Integer SlotMove = Integer.valueof((Math.random()*pokeParsed.moves.Size()));
-        //Utilizo el numero para obtener el nombre del moviemiento de la lista    
-    	String movement = pokeParsed.moves.get(SlotMove).move.name;
-        //Consulto si el registro contiene un nombre igual al anterior    
-    	Movement__c move = [SELECT Id FROM Movement__c WHERE Name=:movement LIMIT 1];
-        //Si es el caso añado mediante el metodo put dentro del campo custom mas el id encontrado    
-    	if(move != null){newPokemon.put('Slot' + i + '__c', move.Id);}
-        else {System.debug('Movement not found');}}
-        return newPokemon;
 
+        newPokemon.ExtId__c = pokemonBodyToParse.id;
+        newPokemon.Name = pokemonBodyToParse.name.capitalize();
+        newPokemon.Name__c = pokemonBodyToParse.name.capitalize();
+        newPokemon.Heigth__c = Double.valueOf(pokemonBodyToParse.height) / 10;
+        newPokemon.Weigth__c = Double.valueOf(pokemonBodyToParse.weight) / 10;
+        newPokemon.Image__c = pokemonBodyToParse.sprites.front_default;   
+        
+
+        for (Integer i = 0; i <= 4; i++) {
+            try {
+                if(i == 0) {
+                    newPokemon.Types__c = pokemonBodyToParse.types.get(i).type.name;
+                }
+                else {
+                    newPokemon.Types__c = newPokemon.Types__c + ';' + pokemonBodyToParse.types.get(i).type.name;
+                }
+            }
+            catch (Exception error) {
+                break;
+            }
+        }
+        
+       
+       
+        Integer randomAbility = Integer.valueof((Math.random() * pokemonBodyToParse.abilities.Size()));
+        String ability = pokemonBodyToParse.abilities.get(randomAbility).ability.name;  
+             
+        try {
+            newPokemon.Ability__c = [
+                SELECT Id 
+                FROM Ability__c 
+                WHERE Name=:ability 
+                LIMIT 1
+            ].Id;
+        }
+        catch(System.QueryException error) {
+            System.debug(error);
+        }
+          
+        // Creo metodo try catch para que no largue error, el error que salia es que en el campo velocidad estaba fuera de los limites List index out of bounds: 5
+        if(pokemonBodyToParse.stats.get(0).base_stat != null) {
+            newPokemon.stats_hp__c = String.valueOf(pokemonBodyToParse.stats.get(0).base_stat);
+        }
+        
+        if(pokemonBodyToParse.stats.get(1).base_stat != null) {
+        	newPokemon.stats_attack__c = String.valueOf(pokemonBodyToParse.stats.get(1).base_stat);
+        }
+        
+        if(pokemonBodyToParse.stats.get(2).base_stat != null) {
+            newPokemon.stats_defense__c = String.valueOf(pokemonBodyToParse.stats.get(2).base_stat);
+        }
+        
+        if(pokemonBodyToParse.stats.get(5).base_stat != null) {
+            newPokemon.stats_speed__c = String.valueOf(pokemonBodyToParse.stats.get(5).base_stat);
+        }
+                    
+ 
+        try {if (pokemonBodyToParse.moves.size() >= 1) {
+
+                String movement = pokemonBodyToParse.moves.get(0).move.name; 
+
+                newPokemon.Slot1__c = [SELECT Id FROM Movement__c WHERE Name=:movement.capitalize()LIMIT 1].Id;}
+
+            if (pokemonBodyToParse.moves.size() >= 2) {
+
+                String movement = pokemonBodyToParse.moves.get(1).move.name;
+
+                newPokemon.Slot2__c = [SELECT Id FROM Movement__c WHERE Name=:movement.capitalize()].Id;}
+            
+            if (pokemonBodyToParse.moves.size() >= 3) {
+
+                String movement = pokemonBodyToParse.moves.get(2).move.name;  
+            
+      			newPokemon.Slot3__c = [SELECT Id FROM Movement__c WHERE Name=:movement].Id;}
+            
+            if (pokemonBodyToParse.moves.size() >= 4) {
+
+                String movement = pokemonBodyToParse.moves.get(3).move.name;  
+            
+                newPokemon.Slot4__c = [SELECT Id FROM Movement__c WHERE Name=:movement].Id;}         
+        }
+        catch(System.NullPointerException error) {
+            System.debug(error);
+        }
+        
+             
+        return newPokemon;  
     }
   }
