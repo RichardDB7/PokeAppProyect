@@ -20,8 +20,8 @@ public class AbilityBatchTest {
         Test.stopTest();
 
         // Comprobacion de inserción del objeto "Ability" con el nombre "Test"
-        List<Ability__c> ab = [SELECT Name, ExtId__c, Effect__c, Name__c FROM Ability__c WHERE Name = 'Test Ability'];
-        System.assertEquals(ab[0].Name, 'Test Ability');
+        List<Ability__c> ab = [SELECT Name, ExtId__c, Effect__c, Name__c FROM Ability__c WHERE Name = 'Adaptability'];
+        System.assertEquals(ab[0].Name, 'Adaptability');
     }
 
     @isTest
