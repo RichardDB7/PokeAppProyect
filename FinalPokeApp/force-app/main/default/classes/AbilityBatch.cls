@@ -3,24 +3,20 @@ public class AbilityBatch implements Database.Batchable<Integer>,Database.Allows
 
     List<Integer> abilityList;
 
-    public AbilityBatch(List<Integer> abilityList) {
-        this.abilityList = abilityList;
-    }
+    public AbilityBatch(List<Integer> abilityList){this.abilityList = abilityList;}
+	
     //Llamada al proceso de lotes y devuelvo la lista de enteros	
-    public Iterable<Integer> start(Database.BatchableContext bc) {
-        // collect the batches of records or objects to be passed to execute
-        return this.abilityList;
-    }
-    //Proceso cada entero de la lista y llamada al metodo getAbility e inserto los datos en el objeto
+    public Iterable<Integer> start(Database.BatchableContext bc){return this.abilityList;}
+	
+    //Proceso cada entero de la lista y llamada al metodo getAbility e inserto el registro
     public void execute(Database.BatchableContext bc, List<Integer> records) {
-        // process each batch of records
+        
         Integer abilityId = Integer.valueOf(records[0]);
         Ability__c abilityToInsert = AbilityHttpCallout.getAbility(abilityId);
 		
         if(abilityToInsert != null){insert abilityToInsert;}
-        else{System.debug('Error inserting ability');}
-       
-    }
+        else{System.debug('Error inserting ability');}}
+	
      //Finalizacion y ejejución en cadena del proximo batch
     public void finish(Database.BatchableContext bc) {
     list<integer> Moves = new list<integer>();
