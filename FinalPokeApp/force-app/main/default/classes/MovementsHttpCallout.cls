@@ -16,7 +16,7 @@ public class MovementsHttpCallout {
     public static Movement__c returnMove(Moves movementParsed){
 	//Instancia del objeto custom
         Movement__c newMove = new Movement__c();
-        //Asignacion de valores al objeto custom
+       
         newMove.name = movementParsed.name == null ? 'No Name' : movementParsed.name.capitalize();
         newMove.name__c = movementParsed.name == null ? 'No Name' : movementParsed.name.capitalize();
         newMove.ExtId__c = movementParsed.id == null ? 0 : movementParsed.id;         
