@@ -12,31 +12,24 @@ public class AbilityHttpCallout {
         Abilities abilityBodyToParse = new Abilities();
 
 
-        if(response.getStatusCode() == 200) {
-            //Obtengo respuesta del body y parseo el resultado
-            String result = String.valueOf(response.getBody());
-            //Mi instancia contiene el resultado procesado
+        if(response.getStatusCode() == 200) {String result = String.valueOf(response.getBody());
             abilityBodyToParse = Abilities.parse(result);
-            //Retorno  del metodo con la instancia como parametro
-           return returnedAbility(abilityBodyToParse);
-        }
+             return returnedAbility(abilityBodyToParse);}
         else {System.debug('Status code: ' + response.getStatusCode());
-              return null;
-        }
-    }
-    //Metodo que retorna el objeto parseado
-    public static Ability__c returnedAbility(Abilities abilityParsed) {
+              return null;}}
+       
+        public static Ability__c returnedAbility(Abilities abilityParsed) {
         
         Ability__c newAbility = new Ability__c();
-        //Asignacion de valores
+
         newAbility.Name__c = abilityParsed.Name.capitalize();
         newAbility.Name = abilityParsed.Name.capitalize();
         newAbility.ExtId__c = abilityParsed.id;
         
-         //Verifico que la lista effect entries esta vacia
+         //Verifico que la lista effect entries esta vacia 
         if (abilityParsed.effect_entries.isEmpty()){newAbility.Effect__c = 'None';}
         
-        else{//Verifico que el id es menor a 191
+        else{//Verifico que el id es menor a 191 dado que desde este indice rompe
             if (abilityParsed.id < 191){//Se asigna el valor al segundo indice
                 newAbility.Effect__c = abilityParsed.effect_entries[1].short_effect;
             }//Se asigna el valor al primer indice
