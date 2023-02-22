@@ -1,8 +1,7 @@
-//Llamada a los movimientos de la api mediante el protocolo http
 public class MovementsHttpCallout {
-    //Metodo de llamada con parámetro de tipo entero
+	
 	public static Movement__c getMove(Integer movimientId) {
-        //Instancias para crear la solicitud GET
+    
         Http http = new Http();HttpRequest request = new HttpRequest();
         
         request.setEndpoint('https://pokeapi.co/api/v2/move/'+ movimientId);request.setMethod('GET');
@@ -10,14 +9,9 @@ public class MovementsHttpCallout {
         HttpResponse response = http.send(request);Moves movementBodyToParse = new Moves();
         
         if(response.getStatusCode() == 200){
-			//Recibo el status 200		
-            String result = String.valueOf(response.getBody());
-            //Si el resultado es 200 se parsea el body en el objeto moves mediante parse()	
-            movementBodyToParse = Moves.parse(result);
-            //Retorno el objeto custom con el body parseado
-			return returnMove(movementBodyToParse);
-        }else { System.debug('Status code: ' + response.getStatusCode());return null;}
-    }
+            String result = String.valueOf(response.getBody());movementBodyToParse = Moves.parse(result);
+           return returnMove(movementBodyToParse);
+       	}else { System.debug('Status code: ' + response.getStatusCode());return null;}}
     
 	//Metodo de objeto custom  que me trae los datos con paso de parámetro objeto moves
     public static Movement__c returnMove(Moves movementParsed){
