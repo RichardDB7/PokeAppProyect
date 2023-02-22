@@ -13,7 +13,6 @@ public class MovementsHttpCallout {
            return returnMove(movementBodyToParse);
        	}else { System.debug('Status code: ' + response.getStatusCode());return null;}}
     
-	//Metodo de objeto custom  que me trae los datos con paso de parámetro objeto moves
     public static Movement__c returnMove(Moves movementParsed){
 	//Instancia del objeto custom
         Movement__c newMove = new Movement__c();
